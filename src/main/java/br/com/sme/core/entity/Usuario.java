@@ -109,4 +109,11 @@ public class Usuario implements DefaultEntity, Serializable {
 		this.nome = nome;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", situacao=" + situacao
+				+ ", email=" + email + ", tipoUsuario=" + tipoUsuario + ",  testes="
+				+ testes + "]";
+	}
+
 }

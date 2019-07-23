@@ -62,4 +62,9 @@ public class Teste implements DefaultEntity, Serializable {
 		this.usuario = usuario;
 	}
 
+	@Override
+	public String toString() {
+		return "Teste [id=" + id + ", dataExecucao=" + dataExecucao + ", situacao=" + situacao + "]";
+	}
+
 }
