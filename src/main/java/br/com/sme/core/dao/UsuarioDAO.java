@@ -11,14 +11,14 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 
 	Logger logger = Logger.getLogger(HierarquiaDAO.class.getName());
 
-	public Usuario findByMatricula(String matricula, boolean situacao, boolean emailIsNotNull) {
+	public Usuario findByMatricula(String matricula, String situacao, boolean emailIsNotNull) {
 		logger.info("Buscando usuario por matricula: " + matricula);
 
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("select usu from Usuario usu where ");
-		sql.append(" matricula = :matricula ");
-		sql.append(" and situacao = :situacao");
+		sql.append(" usu.matricula = :matricula ");
+		sql.append(" and usu.situacao = :situacao");
 
 		
 		if(emailIsNotNull) {
@@ -27,10 +27,8 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 		
 		Query query = em.createQuery(sql.toString());
 
-		String situacaoStr = situacao ? "A" : "I";
-
 		query.setParameter("matricula", matricula);
-		query.setParameter("situacao", situacaoStr);
+		query.setParameter("situacao", situacao);
 
 		try {
 			Usuario usuario = (Usuario) query.getSingleResult();
