@@ -13,10 +13,10 @@ public class UsuarioBusiness {
 	private UsuarioDAO usuarioDAO;
 	
 	public Usuario findByMatriculaEmailIsNotNull(String matricula) {
-		boolean situacaoAtiva = true;
+		String situacao = "A";
 		boolean emailIsNotNull = true;
 		
-		return usuarioDAO.findByMatricula(matricula, situacaoAtiva, emailIsNotNull);
+		return usuarioDAO.findByMatricula(matricula, situacao, emailIsNotNull);
 	}
 
 	
