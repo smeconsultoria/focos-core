@@ -20,14 +20,16 @@ public class HierarquiaDAO extends AbstractDAO<Hierarquia> {
 		sql.append("select distinct hie from Hierarquia hie join fetch hie.usuarios usus");
 		sql.append(" where hie.flagRelatorioUsuariosNaoFizeramTeste = :flagRelatorioUsuariosNaoFizeramTeste ");
 		sql.append(" and hie.matriculasUsuariosReceberaoNotificacoes is not null ");
+		sql.append(" and usus.situacao = :situacaoUsuario ");
 		sql.append(" order by hie.id, usus.nome asc ");
 		 
 		
 		Query query = em.createQuery(sql.toString());
 		
 		int flagRelatorioUsuariosNaoFizeramTesteAtivo = 1;
-		
+		String ativo = "A";
 		query.setParameter("flagRelatorioUsuariosNaoFizeramTeste", flagRelatorioUsuariosNaoFizeramTesteAtivo);
+		query.setParameter("situacaoUsuario", ativo);
 		
 		
 		List<Hierarquia> hierarquias = query.getResultList();

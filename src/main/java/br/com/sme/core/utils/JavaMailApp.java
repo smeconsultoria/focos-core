@@ -20,7 +20,7 @@ public class JavaMailApp {
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.starttls.enable", "true"); // TLS
 
-		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(remetente, senha);
 			}

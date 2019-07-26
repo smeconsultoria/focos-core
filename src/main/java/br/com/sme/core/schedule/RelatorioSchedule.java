@@ -15,7 +15,7 @@ public class RelatorioSchedule {
 	
 	JavaMailApp javaMailApp = new JavaMailApp();
 	
-	@Schedule(hour="*", minute="00,5,10,15,20,25,30,35,40,45,50,55", second="00")
+	@Schedule(hour="*", minute="52", second="00")
 	void agendado() {
 		try {
 			 

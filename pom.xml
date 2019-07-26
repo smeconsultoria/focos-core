@@ -10,6 +10,8 @@
 
 
 	<build>
+		<defaultGoal>install</defaultGoal>
+		<finalName>EmailServer</finalName>
 		<plugins>
 			<!-- we want JDK 1.6 source and binary compatiblility -->
 			<plugin>
@@ -22,17 +24,7 @@
 			</plugin>
 			<!-- ... -->
 			<!-- we want sources to be processed by a specific 1.6 javac -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<verbose>true</verbose>
-					<fork>true</fork>
-					<executable>${JAVA_1_6_HOME}/bin/javac</executable>
-					<compilerVersion>1.3</compilerVersion>
-				</configuration>
-			</plugin>
+
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -49,6 +41,19 @@
 						</resource>
 					</webResources>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+				<executions>
+					<execution></execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

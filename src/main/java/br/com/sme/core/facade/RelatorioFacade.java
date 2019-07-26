@@ -36,12 +36,19 @@ public class RelatorioFacade {
 	public void gerarRelatorio() throws Exception {
 
 		List<Hierarquia> hierarquias = hierarquiaBusiness.getHierarquiasQueEnviamNotificacoes();
+		
+		List<Configuracao> configuracoes = configuracaoDAO.findAll();
 
 		JavaMailApp javaMailApp = new JavaMailApp();
 
 		for (Hierarquia hierarquia : hierarquias) {
-
+			
+			logger.info("Verificando hierarquia: " + hierarquia.getDescricao());
+			
 			String matriculas = hierarquia.getMatriculasUsuariosReceberaoNotificacoes();
+			
+			logger.info("Matriculas que receberao email: " + matriculas);
+			
 
 			String matriculasArr[] = matriculas.split(";");
 
@@ -62,23 +69,32 @@ public class RelatorioFacade {
 
 			if (!htmlMail.isEmpty()) {
 
-				try {
+				boolean tentarNovamente = true;
+				
+				int maxTries = 3;
+				while(tentarNovamente) {
+					try {					
 
-					List<Configuracao> configuracoes = configuracaoDAO.findAll();
+						if (!configuracoes.isEmpty()) {
+							String remetente = configuracoes.get(0).getMailRemente();
+							String senha = configuracoes.get(0).getSenhaRemetente();
+							String assunto = "Usuários que não executaram Teste de Prontidão";
 
-					if (!configuracoes.isEmpty()) {
-						String remetente = configuracoes.get(0).getMailRemente();
-						String senha = configuracoes.get(0).getSenhaRemetente();
-						String assunto = "Usuários que não executaram Teste de Prontidão";
+							String type = "text/html";
 
-						String type = "text/html";
+							javaMailApp.enviarEmail(assunto, htmlMail, remetente, destinatariosRelatorio.toString(), senha,
+									type);
+						}
 
-						javaMailApp.enviarEmail(assunto, htmlMail, remetente, destinatariosRelatorio.toString(), senha,
-								type);
+					} catch (Exception e) {
+						e.printStackTrace();
+						Thread.sleep(3000);
+						maxTries = maxTries - 1;
+						
+						if(maxTries == 0) {
+							tentarNovamente = false;
+						}
 					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
 
 			}
