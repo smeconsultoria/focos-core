@@ -17,7 +17,7 @@ public class RelatorioSchedule {
 	
 	JavaMailApp javaMailApp = new JavaMailApp();
 	
-	@Schedule(hour="*", minute="40", second="00")
+	@Schedule(hour="09,12,15,20", minute="00", second="00")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	void agendado() {
 		try {
