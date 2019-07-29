@@ -3,7 +3,6 @@ package br.com.sme.core.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,7 +41,7 @@ public class Usuario implements DefaultEntity, Serializable {
 	@JoinColumn(name = "hie_id_hierarquia")
 	private Hierarquia hierarquia;
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private List<Teste> testes;
 
 	public Long getId() {
@@ -112,8 +111,7 @@ public class Usuario implements DefaultEntity, Serializable {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", matricula=" + matricula + ", situacao=" + situacao
-				+ ", email=" + email + ", tipoUsuario=" + tipoUsuario + ",  testes="
-				+ testes + "]";
+				+ ", email=" + email + ", tipoUsuario=" + tipoUsuario + ",  testes=" + testes + "]";
 	}
 
 }

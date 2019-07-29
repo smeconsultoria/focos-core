@@ -32,6 +32,7 @@ public class HierarquiaDAO extends AbstractDAO<Hierarquia> {
 		query.setParameter("situacaoUsuario", ativo);
 		
 		
+		@SuppressWarnings("unchecked")
 		List<Hierarquia> hierarquias = query.getResultList();
 		logger.info("Hierarquias encontradas: " + hierarquias.toString());
 		

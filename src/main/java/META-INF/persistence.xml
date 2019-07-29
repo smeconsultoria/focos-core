@@ -7,7 +7,7 @@
 	<persistence-unit name="focosPU" transaction-type="JTA">
 		<jta-data-source>java:/jdbc/FOCOS</jta-data-source>
 		<properties>
-			<property name="hibernate.show_sql" value="${hibernate.show_sql}" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="${hibernate.format_sql}" />
 		</properties>
 	</persistence-unit>

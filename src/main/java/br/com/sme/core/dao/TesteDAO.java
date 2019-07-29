@@ -16,7 +16,7 @@ public class TesteDAO extends AbstractDAO<Teste> {
 
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("select t from Teste t join fetch t.usuario usu where ");
+		sql.append("select t from Teste t join t.usuario usu where ");
 		sql.append(" t.situacao = :situacao ");
 		sql.append(" and usu.id = :idUsuario ");
 		sql.append(" order by t.id desc ");
@@ -28,9 +28,8 @@ public class TesteDAO extends AbstractDAO<Teste> {
 		query.setParameter("situacao", situacaoTesteConcluido);
 		query.setParameter("idUsuario", idUsuario);
 
+		@SuppressWarnings("unchecked")
 		List<Teste> testes = query.setMaxResults(1).getResultList();
-		
-		logger.info("Teste encontrado: " + testes.toString());
 		
 		if(testes.isEmpty()) {
 			return null;

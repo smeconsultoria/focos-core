@@ -12,7 +12,6 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 	Logger logger = Logger.getLogger(HierarquiaDAO.class.getName());
 
 	public Usuario findByMatricula(String matricula, String situacao, boolean emailIsNotNull) {
-		logger.info("Buscando usuario por matricula: " + matricula);
 
 		StringBuilder sql = new StringBuilder();
 
@@ -20,11 +19,10 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 		sql.append(" usu.matricula = :matricula ");
 		sql.append(" and usu.situacao = :situacao");
 
-		
-		if(emailIsNotNull) {
+		if (emailIsNotNull) {
 			sql.append(" and email is not null ");
 		}
-		
+
 		Query query = em.createQuery(sql.toString());
 
 		query.setParameter("matricula", matricula);
@@ -32,8 +30,6 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 
 		try {
 			Usuario usuario = (Usuario) query.getSingleResult();
-
-			logger.info("Usuario encontrado: " + usuario.toString());
 
 			return usuario;
 

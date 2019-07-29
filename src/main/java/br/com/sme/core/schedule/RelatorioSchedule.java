@@ -2,6 +2,8 @@ package br.com.sme.core.schedule;
 
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import br.com.sme.core.facade.RelatorioFacade;
@@ -15,7 +17,8 @@ public class RelatorioSchedule {
 	
 	JavaMailApp javaMailApp = new JavaMailApp();
 	
-	@Schedule(hour="*", minute="52", second="00")
+	@Schedule(hour="*", minute="40", second="00")
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	void agendado() {
 		try {
 			 
