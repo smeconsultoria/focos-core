@@ -15,14 +15,21 @@ public class RelatorioSchedule {
 	@Inject
 	private RelatorioFacade relatorioFacade;
 	
+	private static String SERVER2_8480 = "8480_server_02";
+	private static String SERVER2_8080 = "8080_server_02";
+	
 	JavaMailApp javaMailApp = new JavaMailApp();
 	
-	@Schedule(hour="09,12,15,20", minute="00", second="00")
+	@Schedule(hour="*", minute="*", second="00")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	void agendado() {
 		try {
 			 
-			 relatorioFacade.gerarRelatorio();
+			String serverName = System.getProperty("jboss.server.name"); 
+			
+			if(!SERVER2_8480.equals(serverName) && !SERVER2_8080.equals(serverName)) {
+				relatorioFacade.gerarRelatorio();
+			}
 			 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -16,7 +16,6 @@ import javax.mail.internet.MimeMessage;
 
 import com.google.common.collect.Lists;
 
-import br.com.sme.core.facade.RelatorioFacade;
 import br.com.sme.to.EmailTO;
 
 public class JavaMailApp {
