@@ -15,6 +15,9 @@ public class RelatorioSchedule {
 	@Inject
 	private RelatorioFacade relatorioFacade;
 	
+	private static String SERVER2_8480 = "8480_server_02";
+	private static String SERVER2_8080 = "8080_server_02";
+	
 	JavaMailApp javaMailApp = new JavaMailApp();
 	
 	@Schedule(hour="12", minute="00", second="00")
@@ -22,7 +25,11 @@ public class RelatorioSchedule {
 	void agendado() {
 		try {
 			 
-			 relatorioFacade.gerarRelatorio();
+			String serverName = System.getProperty("jboss.server.name"); 
+			
+			if(!SERVER2_8480.equals(serverName) && !SERVER2_8080.equals(serverName)) {
+				relatorioFacade.gerarRelatorio();
+			}
 			 
 		} catch (Exception e) {
 			e.printStackTrace();
