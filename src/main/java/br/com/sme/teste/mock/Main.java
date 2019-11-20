@@ -128,7 +128,7 @@ public class Main {
 		/* CONVERTER MENSAGEM */
 		String teste = retornoArray[0];
 		retornoArray = teste.split("=");
-		String teste3 = TranslateUtil.convertUnicodeToJava(retornoArray[1]);
+		//String teste3 = TranslateUtil.convertUnicodeToJava(retornoArray[1]);
 
 		System.out.println(retornoArray);
 	}
